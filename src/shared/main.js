@@ -893,7 +893,6 @@ const openDialog = (pathDefault) => {
     , defaultPath: pathDefault ? path.dirname(pathDefault) : app.getPath('documents')
     , properties: ['openFile']
     , filters:  [ {name: 'Gingko Files (*.gko)', extensions: ['gko']}
-                , {name: 'All Files', extensions: ['*']}
                 ]
     }
 
