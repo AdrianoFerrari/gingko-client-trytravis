@@ -1923,9 +1923,9 @@ electron-window@^0.8.0:
   dependencies:
     is-electron-renderer "^2.0.0"
 
-electron@^2.0.0-beta.8:
-  version "2.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-2.0.0-beta.8.tgz#f8f5d5975b16a8a00186e408404a7c473d01c3ab"
+electron@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-2.0.1.tgz#d9defcc187862143b9027378be78490eddbfabf4"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^3.0.1"
