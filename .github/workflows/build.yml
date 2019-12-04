@@ -27,10 +27,11 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: sudo apt-get install xvfb
       - name: Install Node packages
-        run:|
+        run: |
           npm ci
           cd node_modules/segfault-handler
           node-gyp rebuild
+
       - name: Build Electron App
         run: npm run build
       - name: Integration Tests (Linux)
