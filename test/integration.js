@@ -79,7 +79,7 @@ describe("Actions on Untitled Document", function () {
   });
 
   it("should switch to edit mode when pressing Enter", async () => {
-    await app.client.keys("Enter");//keyboard.type(Key.Enter);
+    await app.client.keys("Enter");
     const textareaExists = await app.client.waitForExist("#card-edit-1", 800);
     expect(textareaExists).to.be.true;
   });
@@ -127,7 +127,7 @@ describe("Actions on Untitled Document", function () {
   });
 
   it(`should save on ${commandOrControl}+S`, async () => {
-    await keyboard.type(commandOrControlKey, Key.S);
+    await app.client.keys([commandOrControlKey, "s"]);
     await app.client.pause(1000);
     const saveIndicatorText = await app.client.getText("#save-indicator span");
     expect(saveIndicatorText).to.equal("Saved");
@@ -341,7 +341,7 @@ describe("License Window", function () {
 
   it("should show the license window", async () => {
     await app.client.waitUntilWindowLoaded();
-    await keyboard.type(Key.LeftAlt, commandOrControlKey, Key.LeftShift, Key.Y);
+    await app.client.keys(["Alt", commandOrControlKey, "Shift", "y"]);
     await app.client.windowByIndex(1);
     const title = await app.browserWindow.getTitle();
     expect(title).to.equal("Register Gingko");
