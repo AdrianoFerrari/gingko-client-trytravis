@@ -3,12 +3,10 @@ const {expect} = require("chai");
 const electronPath = require("electron");
 const path = require("path");
 const fs = require("fs-extra");
-//const ks = require("node-key-sender");
-const { keyboard, Key } = require("@nut-tree/nut-js");
 
 
-const commandOrControl = process.platform == "darwin" ? "\uE03D" : "Control";
-const commandOrControlKey = process.platform == "darwin" ? Key.LeftSuper : Key.LeftControl;
+const cmdOrCtrlDisplay = process.platform == "darwin" ? "⌘" : "Ctrl";
+const commandOrControlKey = process.platform == "darwin" ? "\uE03D" : "Control";
 
 
 describe("Application Start", function () {
@@ -100,9 +98,9 @@ describe("Actions on Untitled Document", function () {
     expect(windowTitle).to.equal("*Untitled - Gingko");
   });
 
-  it(`should switch to navigation mode when pressing ${commandOrControl}+Enter`, async () => {
+  it(`should switch to navigation mode when pressing ${cmdOrCtrlDisplay}+Enter`, async () => {
     // Modifier keys are sticky, so they need to be triggered again to release.
-    await app.client.keys([commandOrControl, "Enter", commandOrControl]);
+    await app.client.keys([commandOrControlKey, "Enter", commandOrControlKey]);
     const cardViewExists = await app.client.waitForExist("#card-1 .view", 800);
     expect(cardViewExists).to.be.true;
   });
@@ -118,15 +116,15 @@ describe("Actions on Untitled Document", function () {
     expect(saveIndicatorText).to.equal("Backup Saved");
   });
 
-  it(`should create a new card on ${commandOrControl}+Right`, async () => {
+  it(`should create a new card on ${cmdOrCtrlDisplay}+Right`, async () => {
     // Modifier keys are sticky, so they need to be triggered again to release.
-    await app.client.keys([commandOrControl, "ArrowRight", commandOrControl]);
+    await app.client.keys([commandOrControlKey, "ArrowRight", commandOrControlKey]);
     await app.client.keys("A child card");
     const cardViewExists = await app.client.waitForExist("[id^=card-node-]", 800);
     expect(cardViewExists).to.be.true;
   });
 
-  it(`should save on ${commandOrControl}+S`, async () => {
+  it(`should save on ${cmdOrCtrlDisplay}+S`, async () => {
     await app.client.keys([commandOrControlKey, "s"]);
     await app.client.pause(1000);
     const saveIndicatorText = await app.client.getText("#save-indicator span");
@@ -145,7 +143,7 @@ describe("Actions on Untitled Document", function () {
 
   it("should eventually say \"Saved\" in save indicator when saving card", async () => {
     // Modifier keys are sticky, so they need to be triggered again to release.
-    await app.client.keys([commandOrControl, "Enter", commandOrControl]);
+    await app.client.keys([commandOrControlKey, "Enter", commandOrControlKey]);
     await app.client.pause(500);
     const saveIndicatorText = await app.client.getText("#save-indicator span");
     expect(saveIndicatorText).to.equal("Saved");
